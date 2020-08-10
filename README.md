@@ -64,6 +64,7 @@ And most important. Don't forget to set ENV variables:
 - CORE_PEER_TLS_ENABLED - Set "true" if u using TLS in HLF
 - CORE_PEER_TLS_ROOTCERT_FILE - Path to CA-root certificate
 
+---
 
 # ROADMAP
 - [X] Base methods for API
