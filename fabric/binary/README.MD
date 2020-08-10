@@ -1,3 +1,3 @@
 ```
-Binaryes for debugging
+Binaries for debugging
 ```
