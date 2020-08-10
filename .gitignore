@@ -20,5 +20,4 @@ signer/sign.sh
 config/org.json
 tmp/*.json
 *.json
-fabricorgi
 helm
