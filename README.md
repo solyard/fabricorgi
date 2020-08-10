@@ -32,13 +32,13 @@ docker build . -f Dockerfile -t fabricorgi:latest
 
 Use the output json file produced by `configtxgen` tool and send it into API endpoint depend of your task.
 For adding organisation use:
-`
+```
 example.com:8081/api/v1/addorg
-`
+```
 For remove organisation use:
-`
+```
 example.com:8081/api/v1/removeorg
-`
+```
 
 As body for remove organisation method use this structure:
 ```
