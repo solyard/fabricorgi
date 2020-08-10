@@ -13,3 +13,12 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Additional dependencies
+.vscode
+cmd/signer/sign.sh
+config/org.json
+tmp/*.json
+*.json
+fabricorgi
+helm
