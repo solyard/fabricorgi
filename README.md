@@ -27,6 +27,7 @@ Then run docker build command to build image with fabricorgi:
 ```
 docker build . -f Dockerfile -t fabricorgi:latest
 ```
+---
 
 # HOW TO USE
 
