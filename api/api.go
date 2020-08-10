@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/fabricorgi/cmd/orgchecker"
-	"github.com/fabricorgi/cmd/signer"
 	"github.com/fabricorgi/config"
+	"github.com/fabricorgi/orgchecker"
+	"github.com/fabricorgi/signer"
 	"github.com/gorilla/mux"
 )
 

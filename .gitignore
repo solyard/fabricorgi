@@ -16,7 +16,7 @@
 
 # Additional dependencies
 .vscode
-cmd/signer/sign.sh
+signer/sign.sh
 config/org.json
 tmp/*.json
 *.json

@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/fabricorgi/cmd/orgchecker"
+	"github.com/fabricorgi/orgchecker"
 )
 
 func errorHandler(cmd *exec.Cmd) error {
