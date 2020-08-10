@@ -20,28 +20,27 @@ export CGO_ENABLED=0
 
 Then run command in root dir of project:
 ```
-go build fabricorgi.go
+go build cmd/fabricorgi/fabricorgi.go
 ```
 
 Then run docker build command to build image with fabricorgi:
 ```
 docker build . -f Dockerfile -t fabricorgi:latest
 ```
----
 
 # HOW TO USE
 
 Use the output json file produced by `configtxgen` tool and send it into API endpoint depend of your task.
-For adding organization use:
+For adding organisation use:
 ```
 example.com:8081/api/v1/addorg
 ```
-For remove organization use:
+For remove organisation use:
 ```
 example.com:8081/api/v1/removeorg
 ```
 
-As body for remove organization method use this structure:
+As body for remove organisation method use this structure:
 ```
 {
     OrgName: example1MSP
