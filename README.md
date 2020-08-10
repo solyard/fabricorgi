@@ -47,3 +47,28 @@ As body for remove organization method use this structure:
     OrgName: example1MSP
 }
 ```
+
+---
+
+# ADDITIONAL INFO
+
+I used hyperledger/fabric-tools:2.0 image as base for my application
+In the future, I will replace it with a scratch image which contains the only main app
+
+And most important. Don't forget to set ENV variables:
+- CORE_PEER_ADDRESS - IP:PORT\DNS name of Peer 
+- CORE_PEER_LOCALMSPID - MSP name
+- CORE_PEER_MSPCONFIGPATH - Path to MSP folder
+- FABRICORGI_ORDERER_IP - Orderer DNS\IP:PORT
+(optional)
+- CORE_PEER_TLS_ENABLED - Set "true" if u using TLS in HLF
+- CORE_PEER_TLS_ROOTCERT_FILE - Path to CA-root certificate
+
+
+# ROADMAP
+- [X] Base methods for API
+- [ ] Get channel name from request
+- [ ] Replace binaries via source code of HLF
+- [ ] Add authorization for methods
+- [ ] Implement SwaggerUI
+- [ ] ...
