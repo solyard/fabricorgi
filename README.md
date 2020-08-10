@@ -60,7 +60,9 @@ And most important. Don't forget to set ENV variables:
 - CORE_PEER_LOCALMSPID - MSP name
 - CORE_PEER_MSPCONFIGPATH - Path to MSP folder
 - FABRICORGI_ORDERER_IP - Orderer DNS\IP:PORT
+
 (optional)
+
 - CORE_PEER_TLS_ENABLED - Set "true" if u using TLS in HLF
 - CORE_PEER_TLS_ROOTCERT_FILE - Path to CA-root certificate
 
