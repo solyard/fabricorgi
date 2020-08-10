@@ -8,5 +8,4 @@ require (
 	github.com/gorilla/mux v1.7.4
 	github.com/leodido/go-urn v1.2.0 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
-	gopkg.in/yaml.v2 v2.3.0
 )
