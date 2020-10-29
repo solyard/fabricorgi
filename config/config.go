@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/fabricorgi/orgchecker"
+	"github.com/fabricorgi/cmd/orgchecker"
 	"github.com/go-playground/validator"
 )
 

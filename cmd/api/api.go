@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/fabricorgi/cmd/orgchecker"
+	"github.com/fabricorgi/cmd/signer"
 	"github.com/fabricorgi/config"
-	"github.com/fabricorgi/orgchecker"
-	"github.com/fabricorgi/signer"
 	"github.com/gorilla/mux"
 )
 
@@ -122,7 +122,7 @@ func validateOrganizationRemove(w http.ResponseWriter, r *http.Request) {
 func addOrganization(org *orgchecker.OrganizationConfig) error {
 
 	// Данные для отладки
-	log.Printf("Otestfilerganization Data: %v", org)
+	log.Printf("Organization Data: %v", org)
 
 	// Вызов метода подписи данных и внесения изменения в блок
 	err := signer.SignAndAdd(org)
@@ -167,7 +167,6 @@ func changeBatchSize(orderer *orgchecker.OrdererConfig) error {
 	if orderer.BatchTimeout != "" {
 		log.Printf("BatchTimeout successful changed")
 	}
-
 	return nil
 }
 

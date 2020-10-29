@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/fabricorgi/api"
+	"github.com/fabricorgi/cmd/api"
 	"github.com/fabricorgi/config"
 )
 

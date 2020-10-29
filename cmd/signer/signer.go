@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/fabricorgi/orgchecker"
+	"github.com/fabricorgi/cmd/orgchecker"
 )
 
 func errorHandler(cmd *exec.Cmd) error {
@@ -139,7 +139,7 @@ func SignAndChangeConfig(payload *orgchecker.OrdererConfig) error {
 	}
 
 	if payload.BatchSizePrefferedMaxBytes != 0 {
-		cmd = exec.Command("bash", "-c", fmt.Sprintf("jq '.channel_group.groups.Orderer.values.BatchSize.value.preferred_max_bytes = %d' config.json > modified_config.json", math.Round(payload.BatchSizePrefferedMaxBytes*1024*1024)))
+		cmd = exec.Command("bash", "-c", fmt.Sprintf("jq '.channel_group.groups.Orderer.values.BatchSize.value.preferred_max_bytes = %v' config.json > modified_config.json", math.Round(payload.BatchSizePrefferedMaxBytes*1024*1024)))
 		err = errorHandler(cmd)
 	}
 
