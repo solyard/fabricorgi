@@ -19,6 +19,38 @@ type data struct {
 // APIEndpoint ...
 const APIEndpoint = "/api/v1/"
 
+//......................................................
+// Обработчик метода API для изменения BatchSize в HLF
+//......................................................
+func validateBatchSize(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+
+	var ordererConfig *orgchecker.OrdererConfig
+	_ = json.Unmarshal(body, &ordererConfig)
+
+	err = config.ValidateOrdererConfig(ordererConfig)
+	if err != nil {
+		log.Printf("Error %v", err)
+		http.Error(w, "Bad Request", 400)
+	} else {
+		err = changeBatchSize(ordererConfig)
+		if err != nil {
+			http.Error(w, "Something Crashed...", 500)
+		} else {
+			http.Error(w, "OrdererConfig were changed!", 200)
+		}
+	}
+}
+
+//......................................................
+// Обработчик метода API для добавления организации в HLF
+//......................................................
+
 func validateOrganization(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -54,6 +86,10 @@ func validateOrganization(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//......................................................
+// Обработчик метода API для удаления организации в HLF
+//......................................................
+
 func validateOrganizationRemove(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -86,17 +122,15 @@ func validateOrganizationRemove(w http.ResponseWriter, r *http.Request) {
 func addOrganization(org *orgchecker.OrganizationConfig) error {
 
 	// Данные для отладки
-	log.Printf("Organization Data: %v", org)
+	log.Printf("Otestfilerganization Data: %v", org)
 
 	// Вызов метода подписи данных и внесения изменения в блок
 	err := signer.SignAndAdd(org)
 	if err != nil {
 		log.Printf("Error while additing organisation to HLF. Stacktrace: %v", err)
 		return err
-	} else {
-		log.Print("Organization successfull added to leger")
 	}
-
+	log.Print("Organization successfull added to leger")
 	return nil
 }
 
@@ -105,8 +139,33 @@ func removeOrganization(org *orgchecker.OrganizationRemove) error {
 	if err != nil {
 		log.Printf("Error while delete organisation from HLM. Stacktrace: %v", err)
 		return err
-	} else {
-		log.Printf("Organisation successful removed from ledger")
+	}
+
+	log.Printf("Organisation successful removed from ledger")
+	return nil
+}
+
+func changeBatchSize(orderer *orgchecker.OrdererConfig) error {
+	err := signer.SignAndChangeConfig(orderer)
+	if err != nil {
+		log.Printf("Error while applying new OrdererConfig for HLF. Stacktrace: %v", err)
+		return err
+	}
+
+	if orderer.BatchSizeMaxMessageCount != 0 {
+		log.Printf("BatchSizeMaxMessageCount successful changed")
+	}
+
+	if orderer.BatchSizeAbsoluteMaxBytes != 0 {
+		log.Printf("BatchSizeAbsoluteMaxBytes successful changed")
+	}
+
+	if orderer.BatchSizePrefferedMaxBytes != 0 {
+		log.Printf("BatchSizePrefferedMaxBytes successful changed")
+	}
+
+	if orderer.BatchTimeout != "" {
+		log.Printf("BatchTimeout successful changed")
 	}
 
 	return nil
@@ -120,6 +179,7 @@ func InitialiseAPI() {
 	// Добавляем базовые методы в API для добавления и удаления организации
 	router.HandleFunc(APIEndpoint+"addorg", validateOrganization).Methods("POST")
 	router.HandleFunc(APIEndpoint+"removeorg", validateOrganizationRemove).Methods("POST")
+	router.HandleFunc(APIEndpoint+"batchconfig/set", validateBatchSize).Methods("POST")
 
 	// Крашим приложение если при инициализации роутера возникли ошибки
 	log.Fatal(http.ListenAndServe(":8081", router))

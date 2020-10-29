@@ -1,5 +1,13 @@
 package orgchecker
 
+// OrdererConfig ...
+type OrdererConfig struct {
+	BatchSizeMaxMessageCount   int     `validate:"numeric"`
+	BatchSizeAbsoluteMaxBytes  int     `validate:"numeric"`
+	BatchSizePrefferedMaxBytes float64 `validate:"numeric"`
+	BatchTimeout               string
+}
+
 // OrganizationRemove структура содержащая в себе только
 type OrganizationRemove struct {
 	OrgName string `validate:"required,alphanum"`

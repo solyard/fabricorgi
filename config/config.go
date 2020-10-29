@@ -12,6 +12,16 @@ import (
 var Validate *validator.Validate = validator.New()
 
 //ValidateOrgConfig ...
+func ValidateOrdererConfig(data *orgchecker.OrdererConfig) error {
+
+	err := Validate.Struct(data)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+//ValidateOrgConfig ...
 func ValidateOrgConfig(data *orgchecker.OrganizationConfig) error {
 
 	err := Validate.Struct(data)

@@ -16,8 +16,10 @@
 
 # Additional dependencies
 .vscode
+fabricorgi
 signer/sign.sh
 config/org.json
 tmp/*.json
 *.json
 helm
+Makefile
