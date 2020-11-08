@@ -71,7 +71,7 @@ And most important. Don't forget to set ENV variables:
 
 # ROADMAP
 - [X] Base methods for API
-- [ ] Get channel name from request
+- [X] Get channel name from request
 - [ ] Replace binaries via source code of HLF
 - [ ] Add authorization for methods
 - [ ] Implement SwaggerUI
