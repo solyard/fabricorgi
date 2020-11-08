@@ -54,6 +54,8 @@ func validateBatchSize(w http.ResponseWriter, r *http.Request) {
 func validateOrganization(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
+	// Получение channel переменной из запроса
+	vars := mux.Vars(r)
 	// Получаем из буфера тело запроса
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -74,7 +76,7 @@ func validateOrganization(w http.ResponseWriter, r *http.Request) {
 	} else {
 		log.Printf("Validate org config")
 		// Если валидация прошла запускаем подпись и добавление данных в канала
-		err = addOrganization(orgStruct)
+		err = addOrganization(orgStruct, vars["channel"])
 		if err != nil {
 			// Если при добавлении что-то пошло не так то возвращаем 500 и выплевывает стактрейс в  STDOUT
 			http.Error(w, "Something Crashed...", 500)
@@ -119,13 +121,13 @@ func validateOrganizationRemove(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func addOrganization(org *orgchecker.OrganizationConfig) error {
+func addOrganization(org *orgchecker.OrganizationConfig, channel string) error {
 
 	// Данные для отладки
 	log.Printf("Organization Data: %v", org)
 
 	// Вызов метода подписи данных и внесения изменения в блок
-	err := signer.SignAndAdd(org)
+	err := signer.SignAndAdd(org, channel)
 	if err != nil {
 		log.Printf("Error while additing organisation to HLF. Stacktrace: %v", err)
 		return err
@@ -176,7 +178,7 @@ func InitialiseAPI() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Добавляем базовые методы в API для добавления и удаления организации
-	router.HandleFunc(APIEndpoint+"addorg", validateOrganization).Methods("POST")
+	router.HandleFunc(APIEndpoint+"addorg/{channel}", validateOrganization).Methods("POST")
 	router.HandleFunc(APIEndpoint+"removeorg", validateOrganizationRemove).Methods("POST")
 	router.HandleFunc(APIEndpoint+"batchconfig/set", validateBatchSize).Methods("POST")
 
