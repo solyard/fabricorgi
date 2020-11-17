@@ -10,7 +10,7 @@ What this tool can do?
 
 ---
 
-# HOW TO BUILD
+## HOW TO BUILD
 
 Set the ENV variable CGO_ENABLED to 0 on your system via this command:
 
@@ -28,7 +28,7 @@ Then run docker build command to build image with fabricorgi:
 docker build . -f Dockerfile -t fabricorgi:latest
 ```
 
-# HOW TO USE
+## HOW TO USE
 
 Use the output json file produced by `configtxgen` tool and send it into API endpoint depend of your task.
 For adding organisation use:
@@ -51,7 +51,7 @@ As body for remove organisation method use this structure:
 
 ---
 
-# ADDITIONAL INFO
+## ADDITIONAL INFO
 
 I used hyperledger/fabric-tools:2.0 image as base for my application
 In the future, I will replace it with a scratch image which contains the only main app
@@ -69,7 +69,7 @@ And most important. Don't forget to set ENV variables:
 
 ---
 
-# ROADMAP
+## ROADMAP
 - [X] Base methods for API
 - [X] Get channel name from request
 - [ ] Replace binaries via source code of HLF
