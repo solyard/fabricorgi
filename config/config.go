@@ -3,53 +3,30 @@ package config
 import (
 	"log"
 	"os"
-
-	"github.com/fabricorgi/cmd/orgchecker"
-	"github.com/go-playground/validator"
 )
-
-//Validate ...
-var Validate *validator.Validate = validator.New()
-
-//ValidateOrgConfig ...
-func ValidateOrdererConfig(data *orgchecker.OrdererConfig) error {
-
-	err := Validate.Struct(data)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-//ValidateOrgConfig ...
-func ValidateOrgConfig(data *orgchecker.OrganizationConfig) error {
-
-	err := Validate.Struct(data)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-//ValidateOrgRemoveConfig ...
-func ValidateOrgRemoveConfig(data *orgchecker.OrganizationRemove) error {
-
-	err := Validate.Struct(data)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 
 //GetEnvironmentVariables looking for valid config data...
 func GetEnvironmentVariables() error {
 	var exists bool
 
-	ordererIP, exists := os.LookupEnv("FABRICORGI_ORDERER_IP")
+	_, exists = os.LookupEnv("FABRICORGI_ORDERER_IP")
 	if !exists {
 		log.Printf("Cannot find variable FABRICORGI_ORDERER_IP. Exists: %v", exists)
-	} else {
-		log.Printf("Orderer ip is: %v", ordererIP)
+	}
+
+	_, exists = os.LookupEnv("CORE_PEER_ADDRESS")
+	if !exists {
+		log.Printf("Cannot find variable CORE_PEER_ADDRESS. Exists: %v", exists)
+	}
+
+	_, exists = os.LookupEnv("CORE_PEER_LOCALMSPID")
+	if !exists {
+		log.Printf("Cannot find variable CORE_PEER_LOCALMSPID. Exists: %v", exists)
+	}
+
+	_, exists = os.LookupEnv("CORE_PEER_ADDRESS")
+	if !exists {
+		log.Printf("Cannot find variable CORE_PEER_MSPCONFIGPATH. Exists: %v", exists)
 	}
 
 	return nil

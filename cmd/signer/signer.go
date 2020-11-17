@@ -10,6 +10,7 @@ import (
 	"github.com/fabricorgi/cmd/orgchecker"
 )
 
+//Перехватчик ошибок из CMD
 func errorHandler(cmd *exec.Cmd) error {
 	cmd.Stderr = os.Stderr
 	_, err := cmd.Output()

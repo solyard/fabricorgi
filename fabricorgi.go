@@ -32,6 +32,6 @@ ________ ________  ________  ________  ___  ________  ________  ________  ______
 func initialiseControllerConfig() {
 	err := config.GetEnvironmentVariables()
 	if err != nil {
-		log.Fatalf("Error while check Environment Vars, %v", err)
+		log.Fatalf("Error while call method GetEnvironmentVariables, %v", err)
 	}
 }
