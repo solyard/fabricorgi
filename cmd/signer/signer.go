@@ -82,7 +82,7 @@ func SignAndRemove(payload *orgchecker.OrganizationRemove) error {
 	cmd = exec.Command("bash", "-c", "configtxlator proto_decode --input config_block.pb --type common.Block | jq .data.data[0].payload.data.config > config.json")
 	err = errorHandler(cmd)
 
-	cmd = exec.Command("bash", "-c", fmt.Sprintf("jq '.channel_group.groups.Application.groups.%s)' config.json > modified_config.json", payload.OrgName))
+	cmd = exec.Command("bash", "-c", fmt.Sprintf("jq '.channel_group.groups.Application.groups.%s' config.json > modified_config.json", payload.OrgName))
 	err = errorHandler(cmd)
 
 	cmd = exec.Command("bash", "-c", "configtxlator proto_encode --input config.json --type common.Config --output config.pb")
