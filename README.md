@@ -1,3 +1,7 @@
+Statisitc:
+
+![Image](https://goreportcard.com/badge/github.com/solyard/fabricorgi)
+
 # FABRICORGI - HYPERLEDGER TOOL
 
 ![Image](fabricorgi.png)
