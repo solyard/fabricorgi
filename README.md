@@ -1,4 +1,4 @@
-Statisitc:
+Statistic:
 
 ![Image](https://goreportcard.com/badge/github.com/solyard/fabricorgi)
 
@@ -16,6 +16,7 @@ What this tool can do?
 
 ## HOW TO BUILD
 
+### Without DOCKER
 Set the ENV variable CGO_ENABLED to 0 on your system via this command:
 
 ```
@@ -24,8 +25,10 @@ export CGO_ENABLED=0
 
 Then run command in root dir of project:
 ```
-go build cmd/fabricorgi/fabricorgi.go
+go build .
 ```
+
+### With DOCKER
 
 Then run docker build command to build image with fabricorgi:
 ```
