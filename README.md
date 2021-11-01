@@ -56,6 +56,21 @@ As body for remove organisation method use this structure:
 }
 ```
 
+For change Batch config in HLF use:
+
+```bash
+curl -XPOST -H "Content-type: application/json" -d '
+{
+"batchTimeout": "10s"
+}' 'http://localhost:8081/api/v1/batchconfig/set'
+```
+
+U can change this params:
+- batchTimeout
+- batchSizeMaxMessageCount
+- batchSizeAbsoluteMaxBytes
+- batchSizePrefferedMaxBytes
+
 ---
 
 ## ADDITIONAL INFO
