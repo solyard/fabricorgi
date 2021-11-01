@@ -169,7 +169,7 @@ func SignAndChangeConfig(payload *orgchecker.OrdererConfig) error {
 	cmd = exec.Command("bash", "-c", "peer channel signconfigtx --tls --cafile ${CORE_PEER_TLS_ROOTCERT_FILE} -f update_in_envelope.pb")
 	err = errorHandler(cmd)
 
-	cmd = exec.Command("bash", "-c", "CORE_PEER_LOCALMSPID="+fmt.Sprintf("%sMSP", os.Getenv("ORG_NAME"))+";CORE_PEER_MSPCONFIGPATH="+fmt.Sprintf("/shared/admin%sMSP", strings.ToTitle(os.Getenv("ORG_NAME")))+"; peer channel update --tls --cafile ${CORE_PEER_TLS_ROOTCERT_FILE} -f update_in_envelope.pb -c mainchannel -o ${FABRICORGI_ORDERER_IP}")
+	cmd = exec.Command("bash", "-c", "CORE_PEER_LOCALMSPID="+fmt.Sprintf("%sMSP", os.Getenv("MSP_WITH_ADMIN_ROLE"))+";CORE_PEER_MSPCONFIGPATH="+fmt.Sprintf("/shared/admin%sMSP", strings.ToTitle(os.Getenv("MSP_WITH_ADMIN_ROLE")))+"; peer channel update --tls --cafile ${CORE_PEER_TLS_ROOTCERT_FILE} -f update_in_envelope.pb -c mainchannel -o ${FABRICORGI_ORDERER_IP}")
 	err = errorHandler(cmd)
 
 	if err != nil {
